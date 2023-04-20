@@ -23,8 +23,8 @@ for (let number of numbers) {
     }
     else if(operatorCount){
       // console.log(operatorCount);
-      secondNumbInput=number.innerText;
-      display.innerText+=secondNumbInput;
+      
+    display.innerText+=secondNumbInput;
 
       console.log(secondNumbInput);
     }
