@@ -1,68 +1,101 @@
 const display = document.getElementById("display");
 // console.log(typeof display.innerText);
-let operatorCount=0;
+let operatorCount = false;
 let total = 0;
-let firstNumInput = "0";
-let secondNumbInput = "0";
-let firstValue = "";
-let secondValue = "";
+let firstNumInput = "";
+let secondNumbInput = "";
+let firstValue = 0;
+let secondValue = 0;
+let hasFirstValue = false;
+var operatorSign ="";
 
 const numbers = document.getElementsByClassName("numbers");
 for (let number of numbers) {
-  number.addEventListener("click", function (e) {
+  number.addEventListener("click", function () {
     // console.log(e.target.innerText);
-    if (display.innerText == "0") {
-      display.innerText = "";
+    if (
+      display.innerText.includes(".") &&
+      number.innerText == "." &&
+      !operatorCount
+    ) {
+      return;
     }
-    firstNumInput=number.innerText;
-    console.log(firstNumInput);
-    if(!operatorCount){
-      display.innerText+=firstNumInput;
-      firstNumInput=display.innerText;
-      console.log(firstNumInput);
+    if (
+      secondNumbInput.includes(".") &&
+      number.innerText == "." &&
+      operatorCount
+    ) {
+      return;
     }
-    else if(operatorCount){
-      // console.log(operatorCount);
-      
-    display.innerText+=secondNumbInput;
 
-      console.log(secondNumbInput);
+    if (!hasFirstValue && !operatorCount) {
+      if (display.innerText == "0" && number.innerText == "0") {
+        return;
+      }
+      firstNumInput += number.innerText;
+      display.innerText = firstNumInput;
+      firstValue = parseFloat(firstNumInput);
+      // hasFirstValue=true;
+    } else if (hasFirstValue && operatorCount) {
+      secondNumbInput += number.innerText;
+      display.innerText = secondNumbInput;
+      secondValue = parseFloat(secondNumbInput);
     }
   });
 }
 document.getElementById("ac").addEventListener("click", function () {
   display.innerText = 0;
   total = 0;
+  operatorCount = false;
+  firstNumInput = "";
+  secondNumbInput = "";
+  firstValue = 0;
+  secondValue = 0;
+  hasFirstValue = false;
 });
 
-const operators = document.getElementsByClassName("operator");
-for (let operator of operators) {
-  operator.addEventListener("click", function (e) {
-    if (
-      display.innerText[display.innerText.length - 1] == "+" ||
-      display.innerText[display.innerText.length - 1] == "-" ||
-      display.innerText[display.innerText.length - 1] == "*" ||
-      display.innerText[display.innerText.length - 1] == "/"
-    ) {
-      return;
+const operator = (symbol) => {
+  
+  if(!operatorCount){
+    operatorSign=symbol;
+    hasFirstValue = true;
+    operatorCount=true;
+    console.log(symbol);
+  }
+
+ else if (operatorCount && hasFirstValue) {
+
+    if (operatorSign == "+") {
+      total = firstValue + secondValue;
+     
     }
-    if(operator.innerText == "+"){
-      operatorCount++;
-      firstValue=firstNumInput;
-      total+=parseInt(firstValue);
-      console.log(total);
-      firstNumInput=0
+    if (operatorSign == "-") {
+      total = firstValue - secondValue;
+      
+    }
+    if (operatorSign == "*") {
+      total = firstValue * secondValue;
+     
+    }
+    if (operatorSign == "/") {
+      total = firstValue / secondValue;
+     
+      
+    }
+    if(symbol=="="){
+      // console.log("test");
+      operatorCount = false;
     }
 
     
-  });
-}
-const dotFloat = document.getElementById("float");
+    secondValue = 0;
+    
+    display.innerText = total;
+    console.log(firstValue,secondValue);
+    firstValue = total;
+    secondNumbInput = "";
+    operatorSign=symbol;
+    operatorCount=false;
+  } 
 
-dotFloat.addEventListener("click", function (e) {
-  if (display.innerText[display.innerText.length - 1] == ".") {
-    return;
-  }
- 
-});
-
+};

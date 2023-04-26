@@ -23,6 +23,7 @@ body {
   margin-bottom: 10px;
   padding: 10px 20px;
   color: #ffffff;
+  background-color: #444141;
 }
 
 .numbers,.operator,.equal,.special-operator,#equal,#float{
