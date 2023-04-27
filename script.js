@@ -7,7 +7,8 @@ let secondNumbInput = "";
 let firstValue = 0;
 let secondValue = 0;
 let hasFirstValue = false;
-var operatorSign ="";
+var operatorSign = "";
+let inputAfterEqual = false;
 
 const numbers = document.getElementsByClassName("numbers");
 for (let number of numbers) {
@@ -58,47 +59,39 @@ document.getElementById("ac").addEventListener("click", function () {
 });
 
 const operator = (symbol) => {
-  
-  if(!operatorCount){
-    operatorSign=symbol;
+  if (!operatorCount) {
+    operatorSign = symbol;
     hasFirstValue = true;
-    operatorCount=true;
+    operatorCount = true;
     console.log(symbol);
-  }
-
- else if (operatorCount && hasFirstValue) {
-
+  } else if (operatorCount && hasFirstValue) {
     if (operatorSign == "+") {
       total = firstValue + secondValue;
-     
+      console.log(total);
     }
     if (operatorSign == "-") {
       total = firstValue - secondValue;
-      
     }
     if (operatorSign == "*") {
       total = firstValue * secondValue;
-     
     }
     if (operatorSign == "/") {
       total = firstValue / secondValue;
-     
-      
     }
-    if(symbol=="="){
+    if (symbol == "=") {
+      // console.log("test");
       operatorCount = false;
+      inputAfterEqual = true;
+      firstNumInput = "";
+      hasFirstValue = false;
     }
 
-    
     secondValue = 0;
     display.innerText = total;
-    console.log(firstValue,secondValue);
+    console.log(firstValue, secondValue);
     firstValue = total;
     secondNumbInput = "";
-    operatorSign=symbol;
-    operatorCount=false;
-  } 
-
+    operatorSign = symbol;
+    operatorCount = false;
+  }
 };
-
-
