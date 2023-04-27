@@ -37,6 +37,9 @@ for (let number of numbers) {
       firstValue = parseFloat(firstNumInput);
       // hasFirstValue=true;
     } else if (hasFirstValue && operatorCount) {
+      if (display.innerText == "0" && number.innerText == "0") {
+        return;
+      }
       secondNumbInput += number.innerText;
       display.innerText = secondNumbInput;
       secondValue = parseFloat(secondNumbInput);
@@ -83,13 +86,11 @@ const operator = (symbol) => {
       
     }
     if(symbol=="="){
-      // console.log("test");
       operatorCount = false;
     }
 
     
     secondValue = 0;
-    
     display.innerText = total;
     console.log(firstValue,secondValue);
     firstValue = total;
@@ -99,3 +100,5 @@ const operator = (symbol) => {
   } 
 
 };
+
+
