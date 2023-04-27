@@ -8,7 +8,7 @@ let firstValue = 0;
 let secondValue = 0;
 let hasFirstValue = false;
 var operatorSign = "";
-let inputAfterEqual = false;
+
 
 const numbers = document.getElementsByClassName("numbers");
 for (let number of numbers) {
@@ -81,7 +81,6 @@ const operator = (symbol) => {
     if (symbol == "=") {
       // console.log("test");
       operatorCount = false;
-      inputAfterEqual = true;
       firstNumInput = "";
       hasFirstValue = false;
     }
