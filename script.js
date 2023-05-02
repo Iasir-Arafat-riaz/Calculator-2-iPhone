@@ -36,14 +36,16 @@ for (let number of numbers) {
       firstNumInput += number.innerText;
       display.innerText = firstNumInput;
       firstValue = parseFloat(firstNumInput);
-      // hasFirstValue=true;
-    } else if (hasFirstValue && operatorCount) {
+      console.log("firstValue Achee");
+    } 
+    else if (hasFirstValue && operatorCount) {
       if (display.innerText == "0" && number.innerText == "0") {
         return;
       }
       secondNumbInput += number.innerText;
       display.innerText = secondNumbInput;
       secondValue = parseFloat(secondNumbInput);
+      console.log("second value ache");
     }
   });
 }
@@ -78,19 +80,17 @@ const operator = (symbol) => {
     if (operatorSign == "/") {
       total = firstValue / secondValue;
     }
-    if (symbol == "=") {
+    if (symbol == "="){
       // console.log("test");
       operatorCount = false;
       firstNumInput = "";
       hasFirstValue = false;
     }
-
     secondValue = 0;
     display.innerText = total;
     console.log(firstValue, secondValue);
     firstValue = total;
     secondNumbInput = "";
     operatorSign = symbol;
-    operatorCount = false;
   }
 };
